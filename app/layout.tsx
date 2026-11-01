@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Providers from "@/components/Providers";
+import ScrollToTop from "@/components/ScrollToTop";
 import "./globals.css";
 
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage" });
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       </head>
       <body className="flex min-h-svh flex-col font-sans text-base-content antialiased">
         <Providers>
+          <ScrollToTop />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />

@@ -80,7 +80,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
 }
 
 body {
@@ -168,10 +168,6 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
   .aperture-spin {
     animation-duration: 6s;
   }
