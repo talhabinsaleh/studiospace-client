@@ -10,8 +10,8 @@ A peer-to-peer marketplace where creators find and book photo studios, sound sta
 
 | Role | Email | Password |
 | --- | --- | --- |
-| Creator (has bookings for every status) | `creator@studiospace.demo` | `Creator123` |
-| Host (has listings and booking requests) | `host@studiospace.demo` | `Host1234` |
+| Creator (has bookings for every status) | `creator@studiospace.demo` | `Reel-Creator-4827` |
+| Host (has listings and booking requests) | `host@studiospace.demo` | `Reel-Host-6193` |
 
 The login page also has buttons that fill in these accounts.
 

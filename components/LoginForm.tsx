@@ -11,8 +11,8 @@ import ConfirmInfoModal from "./InfoModal";
 import GoogleButton from "./GoogleButton";
 
 const DEMO = [
-  { label: "Demo creator", email: "creator@studiospace.demo", password: "Creator123" },
-  { label: "Demo host", email: "host@studiospace.demo", password: "Host1234" },
+  { label: "Demo creator", email: "creator@studiospace.demo", password: "Reel-Creator-4827" },
+  { label: "Demo host", email: "host@studiospace.demo", password: "Reel-Host-6193" },
 ];
 
 export default function LoginForm({ redirectTo }: { redirectTo: string }) {
