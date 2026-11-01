@@ -69,7 +69,7 @@ export default function Providers({ children }: { children: ReactNode }) {
   return (
     <WishlistContext.Provider value={value}>
       {children}
-      <Toaster position="top-right" richColors closeButton />
+      <Toaster position="bottom-right" richColors closeButton />
     </WishlistContext.Provider>
   );
 }
