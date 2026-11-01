@@ -88,10 +88,10 @@ export default function Navbar() {
             <div
               ref={menuRef}
               className="relative"
-              onMouseEnter={() => setMenuOpen(true)}
-              onMouseLeave={() => setMenuOpen(false)}
+              onPointerEnter={(event) => event.pointerType === "mouse" && setMenuOpen(true)}
+              onPointerLeave={(event) => event.pointerType === "mouse" && setMenuOpen(false)}
             >
-              <button type="button" onClick={() => setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-label="Open account menu" className="block rounded-full ring-2 ring-transparent transition hover:ring-primary">
+              <button type="button" onPointerUp={(event) => event.pointerType !== "mouse" && setMenuOpen((open) => !open)} onClick={(event) => event.detail === 0 && setMenuOpen((open) => !open)} aria-expanded={menuOpen} aria-label="Open account menu" className="block rounded-full ring-2 ring-transparent transition hover:ring-primary">
                 <Avatar name={user.name} src={user.image} className="size-9 text-xs" />
               </button>
               {menuOpen && (
