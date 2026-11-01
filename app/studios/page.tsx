@@ -45,7 +45,7 @@ export default async function StudiosPage({ searchParams }: { searchParams: Prom
     <div className="page-shell py-12">
       <p className="eyebrow">The full roster</p>
       <h1 className="section-title">Explore studios</h1>
-      <p className="section-text">Compare real rates, capacity and reviews, then book the hours you need.</p>
+      <p className="section-text">Every room on the roster, with its real rate and reviews. Book only the hours you need.</p>
       <div className="mt-8"><Suspense><StudioFilters /></Suspense></div>
       <div className="mt-6">
         <Suspense key={toQuery(params).toString()} fallback={<GridSkeleton count={6} />}>

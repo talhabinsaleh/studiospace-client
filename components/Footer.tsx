@@ -45,7 +45,7 @@ export default function Footer() {
         <div>
           <Logo />
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-base-content/70">
-            We connect creators with the rooms their best work needs, and help studio owners earn from the hours their space sits empty.
+            Good rooms for people making things, by the hour, from the people who built them.
           </p>
           <ul className="mt-5 flex gap-2">
             {SOCIALS.map((social) => (
