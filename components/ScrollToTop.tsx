@@ -9,7 +9,8 @@ export default function ScrollToTop() {
   const pathname = usePathname();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "instant" });
+    // Links like /#about must land on their home page section instead
+    if (!window.location.hash) window.scrollTo({ top: 0, behavior: "instant" });
   }, [pathname]);
 
   return null;

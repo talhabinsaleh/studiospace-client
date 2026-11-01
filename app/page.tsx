@@ -84,7 +84,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="page-shell section-gap">
+      <section id="how-it-works" className="page-shell section-gap">
         <p className="eyebrow">Four steps to rolling</p>
         <h2 className="section-title">How booking works</h2>
         <ol className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -99,6 +99,18 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section id="about" className="border-t border-base-300 bg-base-200/60">
+        <div className="page-shell section-gap grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <p className="eyebrow">About us</p>
+            <h2 className="section-title">Great rooms should not sit empty while good ideas wait.</h2>
+            <p className="section-text">Building a studio is expensive, and most stand unused for much of the week. Meanwhile, independent creators lose momentum because they cannot find or afford the right space.</p>
+            <p className="section-text">StudioSpace connects the two. Owners earn from their unused hours, and creators get professional rooms for exactly the time they need.</p>
+          </div>
+          <StudioImage src="https://images.unsplash.com/photo-1558403194-611308249627?w=1200&q=75&auto=format&fit=crop" alt="Creators talking together in a bright studio lounge" className="aspect-[3/2] w-full rounded-box object-cover" />
+        </div>
       </section>
 
       <section className="bg-neutral text-neutral-content">
