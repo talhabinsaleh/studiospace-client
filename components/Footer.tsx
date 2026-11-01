@@ -65,7 +65,6 @@ export default function Footer() {
             <li><Link className="hover:text-primary" href="/studios">Explore Studios</Link></li>
             <li><Link className="hover:text-primary" href="/how-it-works">How It Works</Link></li>
             <li><Link className="hover:text-primary" href="/about">About Us</Link></li>
-            <li><Link className="hover:text-primary" href="/terms">Terms of Use</Link></li>
           </ul>
         </div>
 
@@ -93,7 +92,7 @@ export default function Footer() {
       <div className="border-t border-base-300">
         <div className="page-shell flex flex-col gap-1 py-5 text-xs text-base-content/65 sm:flex-row sm:justify-between">
           <p>© {new Date().getFullYear()} StudioSpace. All rights reserved.</p>
-          <p>By using StudioSpace you agree to our <Link href="/terms" className="underline hover:text-primary">terms</Link>.</p>
+          <p>By using StudioSpace you agree to follow each host&apos;s house rules and our terms of use.</p>
         </div>
       </div>
     </footer>

@@ -13,14 +13,12 @@ A peer-to-peer marketplace where creators find and book photo studios, sound sta
 | Creator (has bookings for every status) | `creator@studiospace.demo` | `Reel-Creator-4827` |
 | Host (has listings and booking requests) | `host@studiospace.demo` | `Reel-Host-6193` |
 
-The login page also has buttons that fill in these accounts.
-
 ## Features
 
-- **Discover studios:** search and filter by category, rate, rating and group size, with sorting and pagination
+- **Discover studios:** search by name, area or amenity, and filter by category
 - **Live availability:** the booking window marks confirmed hours and shows the full price with deposit
 - **Double-booking prevention:** the server rejects any time that overlaps a confirmed booking, with a clear message
-- **Host dashboard:** hosts confirm, decline and complete booking requests, and see their earnings
+- **Host dashboard:** hosts confirm, decline and complete booking requests
 - **Secure sessions:** BetterAuth with email and Google login, plus a JWT in an HTTPOnly cookie that protects server changes
 - **Studio management:** add, update and delete listings, with imgbb image upload and a confirmation before deleting
 - **Light and dark themes:** the whole site switches, and your choice is remembered

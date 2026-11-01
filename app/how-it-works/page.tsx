@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 };
 
 const CREATOR = [
-  ["Find your room", "Search by name or area, then filter by category, rate, capacity and rating. Every listing shows its hourly rate and deposit up front."],
+  ["Find your room", "Search by name or area, then filter by category. Every listing shows its hourly rate and deposit up front."],
   ["Check the calendar", "Open the booking window and choose a date. Hours that are already confirmed are marked, so you only pick from free slots."],
   ["Send your request", "Your request is saved as Pending, with the price breakdown attached. You can cancel it at any time while it is pending."],
   ["Create and review", "Once the host confirms, download your PDF invoice. After your session, leave a review to help the next creator."],

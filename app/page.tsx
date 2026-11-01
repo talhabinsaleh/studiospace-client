@@ -9,7 +9,7 @@ import { CATEGORIES } from "@/lib/constants";
 import { getCategoryCounts, getFeaturedStudios } from "@/lib/server-api";
 
 const STEPS = [
-  { icon: Search, title: "Discover Spaces", text: "Filter by category, rate, capacity and rating until you find the right room." },
+  { icon: Search, title: "Discover Spaces", text: "Search by name or area and filter by category until you find the right room." },
   { icon: MousePointerClick, title: "Select Shoot Hours", text: "See which hours are already taken, then choose your date and session length." },
   { icon: CalendarCheck, title: "Book Instantly", text: "Send your request with the full price shown. The host confirms it from their dashboard." },
   { icon: Clapperboard, title: "Create & Produce", text: "Download your invoice, arrive on time and make the thing you came to make." },
