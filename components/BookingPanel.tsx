@@ -3,7 +3,7 @@
 import { AlertCircle, CalendarClock } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { api, errorMessage } from "@/lib/api";
 import { useSession } from "@/lib/auth-client";
@@ -36,8 +36,8 @@ export default function BookingPanel({ studio }: { studio: Studio }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [open, setOpen] = useState(false);
   const [now, setNow] = useState(() => Date.now());
-  const today = useMemo(() => localDay(new Date()), []);
-  const [day, setDay] = useState(today);
+  const [today, setToday] = useState("");
+  const [day, setDay] = useState("");
   const [startHour, setStartHour] = useState<number | null>(null);
   const [hours, setHours] = useState(2);
   const [guests, setGuests] = useState(1);
@@ -77,11 +77,12 @@ export default function BookingPanel({ studio }: { studio: Studio }) {
   const loading = open && availabilityKey !== loadedKey;
 
   const isBusy = (hour: number) => {
+    if (!day) return false;
     const start = atHour(day, hour).getTime();
     const end = start + 3_600_000;
     return taken.some((slot) => new Date(slot.start).getTime() < end && new Date(slot.end).getTime() > start);
   };
-  const isPast = (hour: number) => atHour(day, hour).getTime() <= now;
+  const isPast = (hour: number) => Boolean(day) && atHour(day, hour).getTime() <= now;
 
   const startOptions = Array.from({ length: CLOSE_HOUR - OPEN_HOUR }, (_, index) => OPEN_HOUR + index);
   const selectedStart = startHour !== null && !isBusy(startHour) && !isPast(startHour) ? startHour : null;
@@ -121,6 +122,16 @@ export default function BookingPanel({ studio }: { studio: Studio }) {
     }
   }
 
+  // The date is set on opening, since the server and the browser can be in different time zones
+  function openModal() {
+    const current = new Date();
+    const currentDay = localDay(current);
+    setNow(current.getTime());
+    setToday(currentDay);
+    setDay((value) => value || currentDay);
+    setOpen(true);
+  }
+
   const isOwner = session?.user.email === studio.ownerEmail;
 
   return (
@@ -137,7 +148,7 @@ export default function BookingPanel({ studio }: { studio: Studio }) {
       ) : isOwner ? (
         <Link href={`/studios/edit/${studio._id}`} className="btn btn-outline mt-6 w-full">This is your listing. Edit it</Link>
       ) : session ? (
-        <button type="button" onClick={() => { setNow(Date.now()); setOpen(true); }} className="btn btn-primary mt-6 w-full"><CalendarClock className="size-4" /> Book Workspace Now</button>
+        <button type="button" onClick={openModal} className="btn btn-primary mt-6 w-full"><CalendarClock className="size-4" /> Book Workspace Now</button>
       ) : (
         <Link href={`/login?redirect=${encodeURIComponent(`/studios/${studio._id}`)}`} className="btn btn-primary mt-6 w-full"><CalendarClock className="size-4" /> Book Workspace Now</Link>
       )}

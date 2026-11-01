@@ -6,7 +6,7 @@ import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { api, errorMessage } from "@/lib/api";
 import { useSession } from "@/lib/auth-client";
-import { formatDate } from "@/lib/format";
+import { formatDateUTC } from "@/lib/format";
 import type { Review } from "@/lib/types";
 import Avatar from "./Avatar";
 
@@ -72,7 +72,7 @@ export default function Reviews({ studioId, ownerEmail, reviews }: { studioId: s
                   <span className="flex" aria-label={`Rated ${review.rating} out of 5`}>
                     {[1, 2, 3, 4, 5].map((value) => <Star key={value} className={`size-3.5 ${value <= review.rating ? "fill-secondary text-secondary" : "text-base-content/30"}`} />)}
                   </span>
-                  {formatDate(review.createdAt)}
+                  {formatDateUTC(review.createdAt)}
                 </p>
                 <p className="mt-2 leading-relaxed text-base-content/85">{review.comment}</p>
               </div>
