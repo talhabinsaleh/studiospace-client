@@ -9,31 +9,31 @@ import "swiper/css/pagination";
 
 const SLIDES = [
   {
-    image: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=1920&q=80&auto=format&fit=crop",
-    alt: "Recording studio control room with a mixing desk and a wall of guitars",
-    label: "Take 01 / Music",
-    title: "Book the room your record deserves.",
-    text: "Tracking rooms, control suites and writing spaces, available by the hour from musicians who love them.",
+    image: "/photos/control-suite.jpg",
+    alt: "Music control room with a mixing desk, studio monitors and acoustic panels",
+    frame: "Frame 01 / Sound",
+    title: "Your next record needs a better room than your bedroom.",
+    text: "Rent a tuned control suite or a live room by the hour from engineers who built them for their own work.",
   },
   {
-    image: "https://images.unsplash.com/photo-1471341971476-ae15ff5dd4ea?w=1920&q=80&auto=format&fit=crop",
-    alt: "White photography cyc wall with softboxes and strobes",
-    label: "Take 02 / Photo",
-    title: "Your next campaign starts on a clean white wall.",
-    text: "Cyc walls and blackbox rooms with lights already rigged. See every rate and deposit before you book.",
+    image: "/photos/green-screen.jpg",
+    alt: "Film crew setting up cameras in front of a bright green screen",
+    frame: "Frame 02 / Film",
+    title: "Roll on a real stage without renting it for a month.",
+    text: "Green screens and crew-ready floors, with the hourly rate and deposit printed before you ask.",
   },
   {
-    image: "https://images.unsplash.com/photo-1559523161-0fc0d8b38a7a?w=1920&q=80&auto=format&fit=crop",
-    alt: "Two people recording a podcast at a table with microphones",
-    label: "Take 03 / Podcast",
-    title: "Hit record minutes after you walk in.",
-    text: "Podcast rooms with mics, cameras and lighting set up, so your guests get your attention instead of the gear.",
+    image: "/photos/round-table.jpg",
+    alt: "Podcast microphones on boom arms around a round table",
+    frame: "Frame 03 / Voice",
+    title: "Sit down, swing the mic over and start talking.",
+    text: "Podcast rooms where the sound is treated and the gear is checked before you get there.",
   },
 ];
 
 export default function HeroSlider() {
   return (
-    <section aria-label="Featured spaces">
+    <section aria-label="Featured spaces" className="border-b border-base-300">
       <Swiper
         modules={[Autoplay, EffectFade, Keyboard, Pagination]}
         effect="fade"
@@ -42,27 +42,30 @@ export default function HeroSlider() {
         keyboard
         autoplay={{ delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true }}
         pagination={{ clickable: true }}
-        className="h-[min(82svh,720px)] min-h-[520px]"
+        className="[--swiper-pagination-bottom:12px]"
       >
         {SLIDES.map((slide, index) => (
-          <SwiperSlide key={slide.label}>
-            <div className="relative h-full bg-black">
-              <img src={slide.image} alt={slide.alt} className="absolute inset-0 size-full object-cover" loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : undefined} />
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10 sm:bg-gradient-to-r sm:from-black/90 sm:via-black/55 sm:to-transparent" />
-              <div className="page-shell relative flex h-full items-end pb-16 sm:items-center sm:pb-0">
-                <div className="max-w-2xl text-white">
-                  <p className="font-mono text-xs uppercase tracking-[0.2em] text-[#ff8a63]">{slide.label}</p>
-                  {index === 0 ? (
-                    <h1 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-6xl">{slide.title}</h1>
-                  ) : (
-                    <h2 className="mt-4 text-4xl font-bold leading-[1.05] sm:text-6xl">{slide.title}</h2>
-                  )}
-                  <p className="mt-5 max-w-xl text-base leading-relaxed text-white/85 sm:text-lg">{slide.text}</p>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <Link href="/studios" className="btn btn-primary">Explore Studios</Link>
-                    <Link href="/studios" className="btn btn-outline border-white text-white hover:bg-white hover:text-black">Host Your Space</Link>
-                  </div>
+          <SwiperSlide key={slide.frame} className="!bg-base-100">
+            <div className="page-shell grid items-center gap-8 pb-14 pt-8 lg:grid-cols-[1fr_1.2fr] lg:gap-12 lg:py-12">
+              <div className="order-2 lg:order-1">
+                <p className="eyebrow">{slide.frame}</p>
+                {index === 0 ? (
+                  <h1 className="text-4xl font-bold leading-[1.05] sm:text-5xl xl:text-6xl">{slide.title}</h1>
+                ) : (
+                  <h2 className="text-4xl font-bold leading-[1.05] sm:text-5xl xl:text-6xl">{slide.title}</h2>
+                )}
+                <p className="section-text text-lg">{slide.text}</p>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link href="/studios" className="btn btn-primary">Explore Studios</Link>
+                  <Link href="/studios" className="btn btn-outline">Host Your Space</Link>
                 </div>
+              </div>
+              <div className="order-1 overflow-hidden rounded-box lg:order-2">
+                <div className="sprockets" aria-hidden="true" />
+                <div className="film-frame">
+                  <img src={slide.image} alt={slide.alt} className="aspect-[3/2] w-full object-cover" loading={index === 0 ? "eager" : "lazy"} fetchPriority={index === 0 ? "high" : undefined} />
+                </div>
+                <div className="sprockets" aria-hidden="true" />
               </div>
             </div>
           </SwiperSlide>

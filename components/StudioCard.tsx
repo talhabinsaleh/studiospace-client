@@ -24,6 +24,7 @@ export default function StudioCard({ studio }: { studio: Studio }) {
         <span className="absolute left-3 top-3 rounded-selector bg-black/70 px-2 py-1 font-mono text-[11px] uppercase tracking-wider text-white">{studio.category}</span>
         <HeartButton studioId={studio._id} title={studio.title} className="absolute right-3 top-3" />
       </div>
+      <div className="sprockets" aria-hidden="true" />
       <div className="flex flex-1 flex-col p-5">
         <div className="flex items-start justify-between gap-3">
           <h3 className="line-clamp-2 min-h-[3.25rem] text-lg font-semibold leading-snug">{studio.title}</h3>

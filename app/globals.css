@@ -146,6 +146,21 @@ h3 {
   font-weight: 600;
 }
 
+/* Signature detail: the sprocket holes along the edge of a strip of film */
+.sprockets {
+  height: 14px;
+  background-color: #0c0a08;
+  background-image: repeating-linear-gradient(90deg, transparent 0 8px, #f4ede3 8px 18px, transparent 18px 26px);
+  background-size: 100% 6px;
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+}
+
+.film-frame {
+  background: #0c0a08;
+  padding: 0 10px;
+}
+
 @keyframes aperture-spin {
   to {
     transform: rotate(360deg);
