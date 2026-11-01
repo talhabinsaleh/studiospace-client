@@ -1,6 +1,6 @@
 "use client";
 
-import { AlertCircle, Check, Eye, EyeOff, X } from "lucide-react";
+import { AlertCircle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
@@ -15,15 +15,8 @@ export default function RegisterForm() {
   const [email, setEmail] = useState("");
   const [photo, setPhoto] = useState("");
   const [password, setPassword] = useState("");
-  const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
-
-  const rules = [
-    { label: "An uppercase letter", met: /[A-Z]/.test(password) },
-    { label: "A lowercase letter", met: /[a-z]/.test(password) },
-    { label: "At least 6 characters", met: password.length >= 6 },
-  ];
 
   async function submit(event: FormEvent) {
     event.preventDefault();
@@ -34,7 +27,7 @@ export default function RegisterForm() {
       return;
     }
     setBusy(true);
-    const { error: signUpError } = await signUp.email({ name: name.trim(), email, password, image: photo.trim() || undefined });
+    const { error: signUpError } = await signUp.email({ name: name.trim(), email, password, image: photo.trim() });
     if (signUpError) {
       const message = signUpError.status === 422 ? "An account with this email already exists." : signUpError.message ?? "Registration failed. Please try again.";
       setError(message);
@@ -66,23 +59,11 @@ export default function RegisterForm() {
           </label>
           <label className="block">
             <span className="mb-1 block text-sm font-medium">Photo URL</span>
-            <input type="url" value={photo} onChange={(event) => setPhoto(event.target.value)} placeholder="https://..." className="input w-full" />
+            <input type="url" required value={photo} onChange={(event) => setPhoto(event.target.value)} placeholder="https://..." className="input w-full" />
           </label>
           <div>
             <label htmlFor="new-password" className="mb-1 block text-sm font-medium">Password</label>
-            <div className="relative">
-              <input id="new-password" type={show ? "text" : "password"} required autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} className="input w-full pr-11" />
-              <button type="button" onClick={() => setShow((value) => !value)} aria-label={show ? "Hide password" : "Show password"} className="absolute right-1 top-1/2 z-10 -translate-y-1/2 p-2 text-base-content/70">
-                {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-              </button>
-            </div>
-            <ul className="mt-2 space-y-1 text-xs">
-              {rules.map((rule) => (
-                <li key={rule.label} className={`flex items-center gap-1.5 ${rule.met ? "text-success" : "text-base-content/65"}`}>
-                  {rule.met ? <Check className="size-3.5" /> : <X className="size-3.5" />} {rule.label}
-                </li>
-              ))}
-            </ul>
+            <input id="new-password" type="password" required autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} className="input w-full" />
           </div>
           {error && <p role="alert" className="flex items-start gap-2 text-sm text-error"><AlertCircle className="mt-0.5 size-4 shrink-0" /> {error}</p>}
           <button className="btn btn-primary w-full" disabled={busy}>{busy && <span className="loading loading-spinner loading-xs" />} Register</button>
