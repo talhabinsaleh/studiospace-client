@@ -1,4 +1,4 @@
-import { MapPin, Star, Users } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
 import Link from "next/link";
 import { money } from "@/lib/format";
 import type { Studio } from "@/lib/types";
@@ -31,9 +31,6 @@ export default function StudioCard({ studio }: { studio: Studio }) {
         </div>
         <p className="mt-2 flex items-center gap-1.5 text-sm text-base-content/70">
           <MapPin className="size-4 shrink-0" /> <span className="truncate">{studio.location}</span>
-        </p>
-        <p className="mt-1 flex items-center gap-1.5 text-sm text-base-content/70">
-          <Users className="size-4 shrink-0" /> Up to {studio.maxCapacity} people
         </p>
         <div className="mt-auto flex items-center justify-between gap-3 pt-5">
           <p className="font-mono text-lg font-semibold">

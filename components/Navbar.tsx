@@ -1,6 +1,6 @@
 "use client";
 
-import { BookMarked, Building2, Heart, LayoutDashboard, LogOut, Menu, PlusCircle, X } from "lucide-react";
+import { BookMarked, Building2, LayoutDashboard, LogOut, Menu, PlusCircle, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -22,7 +22,6 @@ const USER_LINKS = [
   { href: "/add-studio", label: "Add New Studio", icon: PlusCircle },
   { href: "/my-listings", label: "My Studio Listings", icon: Building2 },
   { href: "/my-bookings", label: "My Bookings", icon: BookMarked },
-  { href: "/wishlist", label: "Saved Studios", icon: Heart },
 ];
 
 export default function Navbar() {
