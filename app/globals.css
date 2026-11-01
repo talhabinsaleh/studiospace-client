@@ -1,0 +1,178 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: false;
+}
+
+/* Darkroom: warm blacks lit by a safelight orange */
+@plugin "daisyui/theme" {
+  name: "studio-dark";
+  default: true;
+  prefersdark: true;
+  color-scheme: dark;
+  --color-base-100: #15120f;
+  --color-base-200: #1e1a16;
+  --color-base-300: #2d2721;
+  --color-base-content: #f4ede3;
+  --color-primary: #ff6a3d;
+  --color-primary-content: #1b0d07;
+  --color-secondary: #e9c46a;
+  --color-secondary-content: #231a05;
+  --color-accent: #7fb8ad;
+  --color-accent-content: #0b1f1b;
+  --color-neutral: #2d2721;
+  --color-neutral-content: #f4ede3;
+  --color-info: #7cb4e8;
+  --color-info-content: #08182a;
+  --color-success: #79c48a;
+  --color-success-content: #08200f;
+  --color-warning: #e9c46a;
+  --color-warning-content: #231a05;
+  --color-error: #f0776c;
+  --color-error-content: #2b0805;
+  --radius-selector: 0.25rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.625rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+/* Contact sheet: warm paper with the same orange, darkened for contrast */
+@plugin "daisyui/theme" {
+  name: "studio-light";
+  color-scheme: light;
+  --color-base-100: #fbf8f2;
+  --color-base-200: #f2ece1;
+  --color-base-300: #e2d9ca;
+  --color-base-content: #211c17;
+  --color-primary: #c8401a;
+  --color-primary-content: #fff8f3;
+  --color-secondary: #8a6412;
+  --color-secondary-content: #fff9ea;
+  --color-accent: #2c6e62;
+  --color-accent-content: #effaf7;
+  --color-neutral: #2b2520;
+  --color-neutral-content: #f7f1e8;
+  --color-info: #23659f;
+  --color-info-content: #f0f7fe;
+  --color-success: #23793a;
+  --color-success-content: #effaf2;
+  --color-warning: #8a6412;
+  --color-warning-content: #fff9ea;
+  --color-error: #b92d21;
+  --color-error-content: #fff3f1;
+  --radius-selector: 0.25rem;
+  --radius-field: 0.375rem;
+  --radius-box: 0.625rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 0;
+  --noise: 0;
+}
+
+@theme {
+  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-instrument), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-base-100);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* One heading style for every section */
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.section-text {
+  margin-top: 0.75rem;
+  max-width: 42rem;
+  line-height: 1.7;
+  color: color-mix(in oklab, var(--color-base-content) 72%, transparent);
+}
+
+/* Small film-slate style label above headings */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.page-shell {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .page-shell {
+    padding-inline: 1.5rem;
+  }
+}
+
+.section-gap {
+  padding-block: clamp(3.5rem, 3rem + 3vw, 6rem);
+}
+
+.btn {
+  font-weight: 600;
+}
+
+@keyframes aperture-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.aperture-spin {
+  animation: aperture-spin 1.6s linear infinite;
+  transform-origin: center;
+}
+
+.swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 0.55 !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ff6a3d !important;
+  opacity: 1 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .aperture-spin {
+    animation-duration: 6s;
+  }
+}
