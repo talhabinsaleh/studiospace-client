@@ -1,6 +1,6 @@
 "use client";
 
-import { BookMarked, Building2, CalendarClock, CalendarDays, Heart, Inbox, Users, Wallet } from "lucide-react";
+import { BookMarked, Building2, CalendarClock, CalendarDays, Heart, Inbox, Users } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -17,7 +17,6 @@ interface Stats {
   listings: number;
   saved: number;
   asGuest: { _id: BookingStatus; count: number }[];
-  asHost: { _id: BookingStatus; count: number; earned: number }[];
 }
 
 export default function DashboardView() {
@@ -43,17 +42,6 @@ export default function DashboardView() {
     try {
       const updated = await api<Booking>(`/api/bookings/${booking._id}/status`, { method: "PATCH", body: { status } });
       setRequests((current) => current?.map((item) => (item._id === updated._id ? updated : item)) ?? null);
-      setStats((current) => {
-        if (!current) return current;
-        const asHost = current.asHost.map((row) => (row._id === booking.status ? { ...row, count: row.count - 1, earned: row.earned - booking.subtotal } : row));
-        const existing = asHost.find((row) => row._id === status);
-        return {
-          ...current,
-          asHost: existing
-            ? asHost.map((row) => (row._id === status ? { ...row, count: row.count + 1, earned: row.earned + booking.subtotal } : row))
-            : [...asHost, { _id: status, count: 1, earned: booking.subtotal }],
-        };
-      });
       toast.success(message);
       setDeclining(null);
     } catch (err) {
@@ -64,14 +52,11 @@ export default function DashboardView() {
   }
 
   const guestCount = (status: BookingStatus) => stats?.asGuest.find((row) => row._id === status)?.count ?? 0;
-  const hostRow = (status: BookingStatus) => stats?.asHost.find((row) => row._id === status);
-  const earned = (hostRow("Confirmed")?.earned ?? 0) + (hostRow("Completed")?.earned ?? 0);
 
   const cards = [
     { label: "My listings", value: stats?.listings ?? 0, icon: Building2, href: "/my-listings" },
     { label: "Upcoming bookings", value: guestCount("Pending") + guestCount("Confirmed"), icon: BookMarked, href: "/my-bookings" },
     { label: "Saved studios", value: stats?.saved ?? 0, icon: Heart, href: "/wishlist" },
-    { label: "Host earnings", value: money(earned), icon: Wallet, href: "#requests" },
   ];
 
   return (
@@ -86,7 +71,7 @@ export default function DashboardView() {
         <div className="mt-8"><RowsSkeleton /></div>
       ) : (
         <>
-          <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-8 grid gap-4 sm:grid-cols-3">
             {cards.map((card) => (
               <li key={card.label}>
                 <Link href={card.href} className="block h-full rounded-box border border-base-300 bg-base-200 p-5 transition-colors hover:border-primary/60">
@@ -121,7 +106,6 @@ export default function DashboardView() {
                             <span className="inline-flex items-center gap-1.5"><Users className="size-4" /> {booking.userName}, {booking.guests} {booking.guests === 1 ? "guest" : "guests"}</span>
                             <span className="font-mono">{money(booking.subtotal)}</span>
                           </p>
-                          {booking.note && <p className="mt-1.5 text-sm italic text-base-content/70">{booking.note}</p>}
                         </div>
                         <div className="flex shrink-0 gap-2">
                           {booking.status === "Pending" && (

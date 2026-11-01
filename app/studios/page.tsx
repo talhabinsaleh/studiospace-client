@@ -1,6 +1,5 @@
 import { SearchX } from "lucide-react";
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Suspense } from "react";
 import EmptyState from "@/components/EmptyState";
 import { GridSkeleton } from "@/components/Skeletons";
@@ -10,7 +9,7 @@ import { getStudios } from "@/lib/server-api";
 
 export const metadata: Metadata = {
   title: "Explore Studios",
-  description: "Search and filter creative spaces by category, hourly rate, rating and capacity.",
+  description: "Search creative spaces and filter them by category.",
 };
 
 type Params = Record<string, string | string[] | undefined>;
@@ -24,19 +23,11 @@ function toQuery(params: Params) {
 }
 
 async function Results({ params }: { params: Params }) {
-  const query = toQuery(params);
-  query.set("limit", "12");
-  const { items, total, page, pages } = await getStudios(query.toString());
+  const { items, total } = await getStudios(toQuery(params).toString());
 
   if (items.length === 0) {
-    return <EmptyState icon={SearchX} title="No studios match your search" text="Try a wider rate, another category or fewer filters. New spaces are added often." href="/studios" cta="Clear all filters" />;
+    return <EmptyState icon={SearchX} title="No studios match your search" text="Try another search word or category. New spaces are added often." href="/studios" cta="Clear all filters" />;
   }
-
-  const pageHref = (target: number) => {
-    const next = toQuery(params);
-    next.set("page", String(target));
-    return `/studios?${next.toString()}`;
-  };
 
   return (
     <>
@@ -44,13 +35,6 @@ async function Results({ params }: { params: Params }) {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((studio) => <StudioCard key={studio._id} studio={studio} />)}
       </div>
-      {pages > 1 && (
-        <nav className="mt-10 flex flex-wrap justify-center gap-2" aria-label="Pages">
-          {Array.from({ length: pages }, (_, index) => index + 1).map((target) => (
-            <Link key={target} href={pageHref(target)} aria-current={target === page ? "page" : undefined} className={`btn btn-sm ${target === page ? "btn-primary" : "btn-outline"}`}>{target}</Link>
-          ))}
-        </nav>
-      )}
     </>
   );
 }

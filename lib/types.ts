@@ -23,8 +23,6 @@ export interface Studio {
 export interface StudioList {
   items: Studio[];
   total: number;
-  page: number;
-  pages: number;
 }
 
 export interface Booking {
@@ -41,7 +39,6 @@ export interface Booking {
   end: string;
   hours: number;
   guests: number;
-  note: string;
   hourlyRate: number;
   securityDeposit: number;
   subtotal: number;

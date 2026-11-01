@@ -41,7 +41,6 @@ export default function BookingPanel({ studio }: { studio: Studio }) {
   const [startHour, setStartHour] = useState<number | null>(null);
   const [hours, setHours] = useState(2);
   const [guests, setGuests] = useState(1);
-  const [note, setNote] = useState("");
   const [taken, setTaken] = useState<{ start: string; end: string }[]>([]);
   const [loadedKey, setLoadedKey] = useState("");
   const [error, setError] = useState("");
@@ -107,7 +106,6 @@ export default function BookingPanel({ studio }: { studio: Studio }) {
           start: atHour(day, selectedStart).toISOString(),
           end: atHour(day, selectedStart + bookedHours).toISOString(),
           guests,
-          note,
         },
       });
       toast.success("Booking request sent. It is now pending host confirmation.");
@@ -200,11 +198,6 @@ export default function BookingPanel({ studio }: { studio: Studio }) {
               </ul>
             )}
           </div>
-
-          <label className="mt-4 block">
-            <span className="mb-1 block text-sm font-medium">Note to host (optional)</span>
-            <textarea rows={2} maxLength={500} value={note} onChange={(event) => setNote(event.target.value)} placeholder="What are you planning to create?" className="textarea w-full" />
-          </label>
 
           <dl className="mt-4 space-y-1.5 border-t border-base-300 pt-4 text-sm">
             <div className="flex justify-between"><dt className="text-base-content/70">{money(studio.hourlyRate)} x {bookedHours} {bookedHours === 1 ? "hour" : "hours"}</dt><dd>{money(subtotal)}</dd></div>

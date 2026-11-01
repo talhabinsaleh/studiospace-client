@@ -18,7 +18,7 @@ export async function getCategoryCounts() {
 }
 
 export async function getStudios(query: string) {
-  return (await get<StudioList>(`/studios?${query}`)) ?? { items: [], total: 0, page: 1, pages: 1 };
+  return (await get<StudioList>(`/studios?${query}`)) ?? { items: [], total: 0 };
 }
 
 export function getStudio(id: string) {
