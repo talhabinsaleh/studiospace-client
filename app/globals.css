@@ -177,6 +177,14 @@ h3 {
   opacity: 0.55 !important;
 }
 
+.hero-slider .swiper-pagination-bullet {
+  background: var(--color-base-content) !important;
+}
+
+.hero-slider .swiper-pagination-bullet-active {
+  background: var(--color-primary) !important;
+}
+
 .swiper-pagination-bullet-active {
   background: #ff6a3d !important;
   opacity: 1 !important;

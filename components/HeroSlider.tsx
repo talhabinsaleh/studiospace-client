@@ -42,7 +42,7 @@ export default function HeroSlider() {
         keyboard
         autoplay={{ delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true }}
         pagination={{ clickable: true }}
-        className="[--swiper-pagination-bottom:12px]"
+        className="hero-slider [--swiper-pagination-bottom:12px]"
       >
         {SLIDES.map((slide, index) => (
           <SwiperSlide key={slide.frame} className="!bg-base-100">
