@@ -33,11 +33,6 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
     }
     await refreshToken();
     toast.success("Welcome back.");
-    // The client router doubles a #section in the address here, so let the browser load those links
-    if (redirectTo.includes("#")) {
-      window.location.assign(redirectTo);
-      return;
-    }
     router.push(redirectTo);
     router.refresh();
   }

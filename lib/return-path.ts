@@ -2,9 +2,9 @@
 // Browser only: call it from a click handler. On the login and register pages
 // it keeps the page already remembered, so a visitor never returns to a form.
 export function authPath(base: "/login" | "/register" = "/login") {
-  const { pathname, search, hash } = window.location;
+  const { pathname, search } = window.location;
   const onAuthPage = pathname === "/login" || pathname === "/register";
-  const target = onAuthPage ? new URLSearchParams(search).get("redirect") : pathname + search + hash;
+  const target = onAuthPage ? new URLSearchParams(search).get("redirect") : pathname + search;
   return withRedirect(base, target);
 }
 

@@ -25,6 +25,8 @@ const USER_LINKS = [
   { href: "/my-bookings", label: "My Bookings", icon: BookMarked },
 ];
 
+const PRIVATE_PAGES = ["/dashboard", "/add-studio", "/my-listings", "/my-bookings", "/wishlist", "/studios/edit"];
+
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
@@ -33,6 +35,7 @@ export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const user = session?.user;
+  const isPrivatePage = PRIVATE_PAGES.some((page) => pathname === page || pathname.startsWith(`${page}/`));
 
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`));
 
@@ -56,7 +59,8 @@ export default function Navbar() {
     setMobileOpen(false);
     await Promise.all([signOut(), fetch("/api/session-token", { method: "DELETE" })]);
     toast.success("You have logged out.");
-    router.push("/");
+    // Public pages stay open after logout. Private pages need a login, so those go home.
+    if (isPrivatePage) router.push("/");
     router.refresh();
   }
 
