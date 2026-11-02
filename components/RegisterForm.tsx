@@ -6,10 +6,11 @@ import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { signOut, signUp } from "@/lib/auth-client";
+import { withRedirect } from "@/lib/return-path";
 import { passwordProblem } from "@/lib/validation";
 import GoogleButton from "./GoogleButton";
 
-export default function RegisterForm() {
+export default function RegisterForm({ redirectTo }: { redirectTo: string }) {
   const router = useRouter();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,7 +39,7 @@ export default function RegisterForm() {
     // Sign up starts a session, but the assignment sends new users to the login page
     await signOut();
     toast.success("Account created. Please log in.");
-    router.push("/login");
+    router.push(withRedirect("/login", redirectTo));
     router.refresh();
   }
 
@@ -70,9 +71,9 @@ export default function RegisterForm() {
         </form>
 
         <div className="divider text-xs text-base-content/60">OR</div>
-        <GoogleButton callbackURL="/" />
+        <GoogleButton callbackURL={redirectTo} />
 
-        <p className="mt-5 text-center text-sm">Already have an account? <Link href="/login" className="font-medium text-primary underline">Login</Link></p>
+        <p className="mt-5 text-center text-sm">Already have an account? <Link href={withRedirect("/login", redirectTo)} className="font-medium text-primary underline">Login</Link></p>
       </div>
     </div>
   );

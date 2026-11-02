@@ -7,6 +7,7 @@ import { useState, type FormEvent } from "react";
 import { toast } from "sonner";
 import { refreshToken } from "@/lib/api";
 import { signIn } from "@/lib/auth-client";
+import { withRedirect } from "@/lib/return-path";
 import ConfirmInfoModal from "./InfoModal";
 import GoogleButton from "./GoogleButton";
 
@@ -32,6 +33,11 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
     }
     await refreshToken();
     toast.success("Welcome back.");
+    // The client router doubles a #section in the address here, so let the browser load those links
+    if (redirectTo.includes("#")) {
+      window.location.assign(redirectTo);
+      return;
+    }
     router.push(redirectTo);
     router.refresh();
   }
@@ -62,7 +68,7 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
         <GoogleButton callbackURL={redirectTo} />
 
 
-        <p className="mt-5 text-center text-sm">New to StudioSpace? <Link href="/register" className="font-medium text-primary underline">Register</Link></p>
+        <p className="mt-5 text-center text-sm">New to StudioSpace? <Link href={withRedirect("/register", redirectTo)} className="font-medium text-primary underline">Register</Link></p>
       </div>
 
       <ConfirmInfoModal open={forgotOpen} title="Password reset is turned off" onClose={() => setForgotOpen(false)}>

@@ -1,11 +1,12 @@
 "use client";
 
 import { Heart } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "sonner";
 import { errorMessage } from "@/lib/api";
 import { useSession } from "@/lib/auth-client";
+import { authPath } from "@/lib/return-path";
 import { useWishlist } from "./Providers";
 
 export default function HeartButton({ studioId, title, className = "" }: { studioId: string; title: string; className?: string }) {
@@ -13,13 +14,12 @@ export default function HeartButton({ studioId, title, className = "" }: { studi
   const { ids, add, remove } = useWishlist();
   const [busy, setBusy] = useState(false);
   const router = useRouter();
-  const pathname = usePathname();
   const saved = ids.has(studioId);
 
   async function toggle() {
     if (!session) {
       toast.info("Please log in to save studios.");
-      router.push(`/login?redirect=${encodeURIComponent(pathname)}`);
+      router.push(authPath());
       return;
     }
     setBusy(true);

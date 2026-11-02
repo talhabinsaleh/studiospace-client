@@ -6,6 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 import { signOut, useSession } from "@/lib/auth-client";
+import AuthLink from "./AuthLink";
 import Avatar from "./Avatar";
 import Logo from "./Logo";
 import ThemeToggle from "./ThemeToggle";
@@ -121,8 +122,8 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="hidden items-center gap-2 sm:flex">
-              <Link href="/login" className="btn btn-ghost btn-sm">Login</Link>
-              <Link href="/register" className="btn btn-primary btn-sm">Register</Link>
+              <AuthLink href="/login" className="btn btn-ghost btn-sm">Login</AuthLink>
+              <AuthLink href="/register" className="btn btn-primary btn-sm">Register</AuthLink>
             </div>
           )}
           <button type="button" className="btn btn-ghost btn-square btn-sm lg:hidden" onClick={() => setMobileOpen((open) => !open)} aria-expanded={mobileOpen} aria-label={mobileOpen ? "Close menu" : "Open menu"}>
@@ -143,8 +144,8 @@ export default function Navbar() {
             ))}
             {!user && !isPending && (
               <li className="mt-3 grid grid-cols-2 gap-2 sm:hidden">
-                <Link href="/login" onClick={() => setMobileOpen(false)} className="btn btn-outline btn-sm">Login</Link>
-                <Link href="/register" onClick={() => setMobileOpen(false)} className="btn btn-primary btn-sm">Register</Link>
+                <AuthLink href="/login" onClick={() => setMobileOpen(false)} className="btn btn-outline btn-sm">Login</AuthLink>
+                <AuthLink href="/register" onClick={() => setMobileOpen(false)} className="btn btn-primary btn-sm">Register</AuthLink>
               </li>
             )}
           </ul>
